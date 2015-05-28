@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>  /* dla funkcji rand() oraz srand() */
+#include <time.h>         /* dla funkcji time() */
+
+main()
+{
+  int i, j, n, m;
+  float re;
+  FILE *fp;
+  char fileName[128];
+
+  printf("Wprowadz nazwe pliku wynikowego..\n");
+  scanf("%s",&fileName);
+
+  printf("Wprowadz po sobie liczbe wierszy i kolumn macierzy oddzielone spacj¹..\n");
+  scanf("%d %d", &n, &m);
+
+           /* je¿eli wyst¹pi³ b³¹d w otwieraniu pliku i go nie otwarto,
+            wówczas funkcja fclose(fp) wywo³ana na koñcu programu zg³osi b³¹d
+            wykonania i wysypie nam program z dzia³ania, st¹d musimy umieœciæ
+            warunek, który w kontrolowany sposób zatrzyma program (funkcja exit;)
+           */
+  if ( (fp = fopen(fileName, "w")) == NULL )  
+  {
+    puts("Otwarcie pliku nie jest mozliwe!");
+    exit;    /*  jeœli w procedurze glownej
+              to piszemy bez nawiasow */
+  }
+
+  else  { puts("Plik otwarty prawid³owo..");  }
+  
+  fprintf(fp, "%d %d\n", n, m);
+          /* w pierwszym wierszu umieszczono wymiary macierzy */
+
+  srand( (unsigned int) time(0) );
+  for (i=1; i<=n; ++i)
+  {
+    for (j=1; j<=m; ++j)
+    {
+      re = ((rand() % 200)-100)/ 10.0;
+      fprintf(fp,"%.1f", re );
+      if (j!=m) fprintf(fp,"    ");
+    }
+  fprintf(fp,"\n");
+  }  
+  fclose(fp);
+  return 0;
+}
