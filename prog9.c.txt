@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <limits.h>
+
+void dectobin (unsigned short a)
+{
+  int licznik;      
+
+  /* CHAR_BIT to liczba bitów w bajcie */
+  licznik = CHAR_BIT * sizeof(a);
+  while (--licznik >= 0) {
+    putchar (((a >> licznik) & 1) ? '1' : '0');
+  }
+}
+
+int main ()
+{
+  unsigned short a;
+
+  printf ("Podaj liczbê od 0 do %hd: ", USHRT_MAX);
+  scanf ("%hd", &a);
+  printf ("%hd(10) = ", a);
+  dectobin (a);
+  printf ("(2)\n");
+
+  return 0;
+}
