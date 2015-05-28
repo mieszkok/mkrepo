@@ -1,4 +1,4 @@
-#include <stdarg.h>
+#include <stdarg.h>//tutaj tutaj
 #include <stdio.h>
 
 /* this function will take the number of values to average
